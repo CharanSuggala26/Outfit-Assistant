@@ -1,6 +1,8 @@
 import './App.css'
 import Vacation from './pages/Vacation'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import WorldMapDemo from './pages/WorldMapDemo.jsx'
+import MacbookScrollDemo from './pages/MacbookScrollDemo.jsx'
 
 
 function App() {
@@ -10,7 +12,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Vacation />} />
+          <Route path="/Vacation" element={<Vacation />} />
+          <Route path="/" element={<WorldMapDemo />} />
+          <Route path="/MacbookScrollDemo" element={<MacbookScrollDemo />} />
         </Routes>
       </BrowserRouter>
      
