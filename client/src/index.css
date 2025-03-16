@@ -1,2 +1,14 @@
 @import "tailwindcss"; 
 
+:root {
+    --cyan-500: #06b6d4;
+    --emerald-500: #10b981;
+    --pink-500: #ec4899;
+    --indigo-500: #6366f1;
+    --orange-500: #f97316;
+    --yellow-500: #eab308;
+    --slate-900: #0f172a;
+    --black: #000000;
+    --neutral-900: #171717;
+  }
+
