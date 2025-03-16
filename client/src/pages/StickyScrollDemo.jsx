@@ -5,7 +5,7 @@ const content = [
   {
     title: "Enter Location",
     description:
-     "Start by entering your location to personalize outfit recommendations based on weather, trends, and local fashion preferences.",
+     "Begin by entering your location to get outfit recommendations tailored to your region. The AI considers factors like weather, local fashion trends, and cultural preferences to suggest the most suitable outfits for your needs.",
     content: (
         <div className="h-full w-full flex items-center justify-center text-white">
         <img
@@ -19,7 +19,7 @@ const content = [
   {
     title: "Choose Date and Upload Image",
     description:
-    "Select the date for which you need the outfit, whether it's for a special event or casual wear. Then, upload your image to ensure the AI provides personalized styling suggestions.",
+    "Select the date for which you need the outfit—whether it's for a casual day, office meeting, party, or a special occasion. Upload a clear image of yourself so the AI can generate personalized outfit suggestions that match your style, body type, and preferences.",
     content: (
       <div className="h-full w-full flex items-center justify-center text-white">
         <img
@@ -33,7 +33,7 @@ const content = [
   {
     title: "Choose from the Generated Outfits",
     description:
-      "Browse through AI-curated outfit options tailored to your style, body type, and occasion. Select the one that best suits your preference.",
+      "Explore a variety of AI-curated outfit options designed to fit your selected occasion and personal style. Each outfit is carefully selected based on color combinations, fabric choices, and fashion trends. Pick the one that resonates with your style and comfort.",
     content: (
         <div className="h-full w-full flex items-center justify-center text-white">
         <img
@@ -47,7 +47,7 @@ const content = [
   {
     title: "Virtual Try-On",
     description:
-      "Experience a real-time preview of how the selected outfit looks on you using advanced AI-based Virtual Try-On technology before making a final decision.",
+      "See how the chosen outfit looks on you before making a decision! Using advanced AI-powered Virtual Try-On technology, the system overlays the selected outfit onto your uploaded image, providing a realistic preview. Make adjustments, try different styles, and finalize your perfect look with confidence.",
     content: (
         <div className="h-full w-full flex items-center justify-center text-white">
         <img
