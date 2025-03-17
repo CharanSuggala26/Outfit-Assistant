@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 //import MacbookScrollDemo from './pages/MacbookScrollDemo.jsx'
 //import StickyScrollDemo from './pages/StickyScrollDemo.jsx'
 import Home from './pages/Home'
+import About from './pages/About'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/Vacation" element={<Vacation />} />
           <Route path="/" element={<Home />} />
+          <Route path="/About" element={<About />} />
         </Routes>
       </BrowserRouter>
      
