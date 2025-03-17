@@ -317,7 +317,7 @@ function Vacation() {
         </div>
       )}
 
-      <main className="max-w-7xl mx-auto px-4 py-12">
+      <main className="max-w-7xl mx-auto px-4 py-12 mt-12">
         <div className="bg-white rounded-2xl shadow-xl p-8 max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
             Plan Your Perfect Vacation Outfit
