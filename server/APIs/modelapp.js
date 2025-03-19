@@ -7,7 +7,7 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 
-const OPENWEATHER_API_KEY = process.env.OPENWEATHER_API_KEY;
+const OPENWEATHER_API_KEY=process.env.OPENWEATHER_API_KEY;
 const url = "https://api.segmind.com/v1/try-on-diffusion";
 
 // Function to convert an image file from the filesystem to base64
@@ -16,7 +16,7 @@ function imageFileToBase64(imagePath) {
     return Buffer.from(imageData).toString('base64');
 }
 
-router.post('/', expAsyncHandler(async (req, res) => {
+router.post('/',expAsyncHandler(async (req, res) => {
     const { location, date, gender } = req.body;
 
     let weatherData;
@@ -30,7 +30,7 @@ router.post('/', expAsyncHandler(async (req, res) => {
             return res.status(404).json({ error: 'Location not found' });
         }
 
-        const { lat, lon } = geoResponse.data[0];
+        const {lat,lon} = geoResponse.data[0];
 
         const weatherResponse = await axios.get(
             `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${OPENWEATHER_API_KEY}`

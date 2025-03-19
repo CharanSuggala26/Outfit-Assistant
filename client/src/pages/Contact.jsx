@@ -1,9 +1,11 @@
 import React, { forwardRef, useRef, useState, useEffect } from "react";
-import { motion, useMotionValue } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
+// Simplified cn utility (className concatenation)
 const cn = (...classes) => classes.filter(Boolean).join(" ");
 
+// AnimatedBeam component with persistent beams
 const AnimatedBeam = ({
   containerRef,
   fromRef,
@@ -35,7 +37,7 @@ const AnimatedBeam = ({
 
   useEffect(() => {
     const handleUpdate = () => setPathD(updatePath());
-    handleUpdate(); 
+    handleUpdate(); // Initial update
     window.addEventListener("resize", handleUpdate);
     return () => window.removeEventListener("resize", handleUpdate);
   }, [containerRef, fromRef, toRef, curvature, reverse, endYOffset]);
@@ -56,6 +58,7 @@ const AnimatedBeam = ({
   );
 };
 
+// Circle component
 const Circle = forwardRef(({ className, children }, ref) => (
   <div
     ref={ref}
@@ -69,13 +72,14 @@ const Circle = forwardRef(({ className, children }, ref) => (
 ));
 Circle.displayName = "Circle";
 
-const AnimatedBeamDemo = () => {
+// AnimatedBeamDemo for Contact methods
+const ContactBeamDemo = () => {
   const containerRef = useRef(null);
-  const aiCoreRef = useRef(null); 
-  const locationRef = useRef(null); 
-  const userImageRef = useRef(null); 
-  const outfitRef = useRef(null); 
-  const tryOnRef = useRef(null); 
+  const contactHubRef = useRef(null); // Central Contact Hub
+  const emailRef = useRef(null); // Email (top)
+  const phoneRef = useRef(null); // Phone (right)
+  const socialRef = useRef(null); // Social Media (bottom)
+  const supportRef = useRef(null); // Support (left)
 
   return (
     <div
@@ -83,64 +87,74 @@ const AnimatedBeamDemo = () => {
       ref={containerRef}
     >
       <div className="relative flex h-full w-full max-w-lg items-center justify-center">
+        {/* Central Contact Hub */}
         <Circle
-          ref={aiCoreRef}
+          ref={contactHubRef}
           className="absolute left-1/2 top-1/2 size-16 -translate-x-1/2 -translate-y-1/2"
         >
-          🤖
-        </Circle>
-        <Circle
-          ref={locationRef}
-          className="absolute left-1/2 top-0 -translate-x-1/2"
-        >
-          🌍
-        </Circle>
-        <Circle
-          ref={userImageRef}
-          className="absolute right-0 top-1/2 -translate-y-1/2"
-        >
-          📸
+          📬
         </Circle>
 
+        {/* Email (Top) */}
         <Circle
-          ref={outfitRef}
+          ref={emailRef}
+          className="absolute left-1/2 top-0 -translate-x-1/2"
+        >
+          ✉️
+        </Circle>
+
+        {/* Phone (Right) */}
+        <Circle
+          ref={phoneRef}
+          className="absolute right-0 top-1/2 -translate-y-1/2"
+        >
+          📞
+        </Circle>
+
+        {/* Social Media (Bottom) */}
+        <Circle
+          ref={socialRef}
           className="absolute bottom-0 left-1/2 -translate-x-1/2"
         >
-          👕
+          🌐
         </Circle>
+
+        {/* Support (Left) */}
         <Circle
-          ref={tryOnRef}
+          ref={supportRef}
           className="absolute left-0 top-1/2 -translate-y-1/2"
         >
-          👗
+          🆘
         </Circle>
       </div>
+
+      {/* Animated Beams connecting to Contact Hub */}
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={locationRef}
-        toRef={aiCoreRef}
+        fromRef={emailRef}
+        toRef={contactHubRef}
         curvature={-50}
         endYOffset={-10}
       />
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={userImageRef}
-        toRef={aiCoreRef}
+        fromRef={phoneRef}
+        toRef={contactHubRef}
         curvature={50}
         endYOffset={0}
         reverse
       />
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={outfitRef}
-        toRef={aiCoreRef}
+        fromRef={socialRef}
+        toRef={contactHubRef}
         curvature={50}
         endYOffset={10}
       />
       <AnimatedBeam
         containerRef={containerRef}
-        fromRef={tryOnRef}
-        toRef={aiCoreRef}
+        fromRef={supportRef}
+        toRef={contactHubRef}
         curvature={-50}
         endYOffset={0}
         reverse
@@ -149,7 +163,8 @@ const AnimatedBeamDemo = () => {
   );
 };
 
-const About = () => {
+// Main Contact component
+const Contact = () => {
   const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
@@ -160,9 +175,14 @@ const About = () => {
     visible: { opacity: 1, transition: { duration: 1, delay: 0.2 } },
   };
 
+  const scaleHover = {
+    hover: { scale: 1.05, transition: { duration: 0.3 } },
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black py-16 text-white">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        {/* Hero Section */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -170,66 +190,67 @@ const About = () => {
           className="mb-12 text-center"
         >
           <h1 className="mb-6 text-4xl font-bold text-teal-400 md:text-5xl">
-            Welcome to AI Vacation Outfit Assistant
+            Get in Touch
           </h1>
           <p className="mx-auto max-w-3xl text-lg text-gray-300 md:text-xl">
-            Your go-to companion for effortless style, blending cutting-edge AI
-            with your unique flair.
+            We’re here to help you with any questions, feedback, or style advice.
+            Reach out and let’s connect!
           </p>
         </motion.div>
+
+        {/* Contact Form */}
         <motion.div
           initial="hidden"
           animate="visible"
           variants={fadeIn}
-          className="mb-16"
+          className="mb-16 mx-auto max-w-lg"
         >
-          <img
-            src="https://static.fibre2fashion.com//articleresources/images/23/2287/SS988ebe_Small.jpg"
-            alt="Fashion Inspiration"
-            className="mx-auto w-full max-w-2xl rounded-lg shadow-xl"
-          />
-        </motion.div>
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeInUp}
-          className="mb-16 text-center"
-        >
-          <h2 className="mb-4 text-3xl font-semibold text-teal-400 md:text-4xl">
-            Our Mission
-          </h2>
-          <p className="mx-auto max-w-4xl text-lg text-gray-300">
-            At AI Vacation Outfit Assistant, we believe dressing well should be
-            simple, fun, and tailored to you. Our mission is to empower everyone
-            to look their best—whether for a vacation, a big event, or just
-            another day—by harnessing smart technology to craft personalized
-            outfit ideas that inspire confidence and creativity.
-          </p>
+          <form className="space-y-6">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-300">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                className="mt-1 block w-full rounded-md border-gray-700 bg-gray-800 p-3 text-white focus:border-teal-500 focus:ring-teal-500"
+                placeholder="Your Name"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-300">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                className="mt-1 block w-full rounded-md border-gray-700 bg-gray-800 p-3 text-white focus:border-teal-500 focus:ring-teal-500"
+                placeholder="Your Email"
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium text-gray-300">
+                Message
+              </label>
+              <textarea
+                id="message"
+                rows="4"
+                className="mt-1 block w-full rounded-md border-gray-700 bg-gray-800 p-3 text-white focus:border-teal-500 focus:ring-teal-500"
+                placeholder="Your Message"
+              />
+            </div>
+            <motion.button
+              type="submit"
+              whileHover="hover"
+              variants={scaleHover}
+              className="w-full rounded-md bg-teal-500 px-6 py-3 font-semibold text-white hover:bg-teal-600"
+            >
+              Send Message
+            </motion.button>
+          </form>
         </motion.div>
 
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeInUp}
-          className="mb-16 text-center"
-        >
-          <h2 className="mb-4 text-3xl font-semibold text-teal-400 md:text-4xl">
-            Why Choose Us?
-          </h2>
-          <p className="mx-auto mb-8 max-w-4xl text-lg text-gray-300">
-            We combine AI precision with a passion for fashion to deliver outfit
-            inspiration that’s as unique as you are. From understanding your
-            environment to offering a virtual preview of your look, we’re here
-            to make style effortless and exciting—no matter where life takes
-            you.
-          </p>
-          <Link
-            to="/home"
-            className="inline-block rounded-md bg-teal-500 px-8 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-teal-600"
-          >
-            Get Started
-          </Link>
-        </motion.div>
+        {/* Contact Methods Section */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -237,17 +258,23 @@ const About = () => {
           className="text-center"
         >
           <h2 className="mb-6 text-3xl font-semibold text-teal-400 md:text-4xl">
-            How It Works
+            Reach Us Any Way You Like
           </h2>
-          <AnimatedBeamDemo />
+          <ContactBeamDemo />
           <p className="mx-auto mt-4 max-w-4xl text-lg text-gray-300">
-            Our AI connects your world—location, preferences, and style—to create
-            a seamless fashion experience.
+            Whether it’s a quick email, a phone call, or a social media shoutout,
+            we’re just a click away.
           </p>
+          <Link
+            to="/"
+            className="mt-8 inline-block rounded-md bg-teal-500 px-8 py-3 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-teal-600"
+          >
+            Back to Home
+          </Link>
         </motion.div>
       </div>
     </div>
   );
 };
 
-export default About;
+export default Contact;
