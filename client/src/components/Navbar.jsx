@@ -14,7 +14,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-lg py-4">
+    <nav className="bg-teal-300 shadow-lg py-4">
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo / Brand */}
         <Link to="/" className="text-2xl font-bold text-gray-800">
@@ -81,3 +81,8 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+

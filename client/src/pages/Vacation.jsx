@@ -1,198 +1,3 @@
-// import { useState } from 'react';
-// import DatePicker from 'react-datepicker';
-// import axios from 'axios';
-// import "react-datepicker/dist/react-datepicker.css";
-// import { FaCalendar, FaMapMarkerAlt, FaCamera } from 'react-icons/fa';
-// import { ExternalLink, Shirt } from 'lucide-react';
-// import Navbar from '../components/Navbar';
-
-// function Vacation() {
-//   const [location, setLocation] = useState('');
-//   const [date, setDate] = useState(new Date());
-//   const [userImage, setUserImage] = useState(null);
-//   const [weather, setWeather] = useState(null);
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState(null);
-//   const [outfits, setOutfits] = useState([]);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setError(null);
-    
-//     try {
-//       const gender = "male"
-//       const formData = {location, date, gender}
-      
-//       console.log(formData)
-//       const response = await axios.post('http://localhost:4700/model', formData);
-//       const { weatherData, thumbnails } = response.data.payload;
-      
-//       setWeather(weatherData);
-//       setOutfits(thumbnails);
-//     } catch (err) {
-//       console.log(err)
-//       setError(err.message);
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
-
-//   const handleImageUpload = (e) => {
-//     const file = e.target.files[0];
-//     if (file) {
-//       const reader = new FileReader();
-//       reader.onloadend = () => {
-//         setUserImage(reader.result);
-//       };
-//       reader.readAsDataURL(file);
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-//       <Navbar />
-
-//       <main className="max-w-7xl mx-auto px-4 py-12">
-//         <div className="bg-white rounded-2xl shadow-xl p-8 max-w-3xl mx-auto">
-//           <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
-//             Plan Your Perfect Vacation Outfit
-//           </h2>
-          
-//           <form onSubmit={handleSubmit} className="space-y-6">
-//             <div className="space-y-4">
-//               <div className="relative">
-//                 <FaMapMarkerAlt className="absolute top-3 left-3 text-gray-400" />
-//                 <input
-//                   type="text"
-//                   value={location}
-//                   onChange={(e) => setLocation(e.target.value)}
-//                   placeholder="Enter your destination"
-//                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-//                   required
-//                 />
-//               </div>
-
-//               <div className="relative">
-//                 <FaCalendar className="absolute top-3 left-3 text-gray-400" />
-//                 <DatePicker
-//                   selected={date}
-//                   onChange={(date) => setDate(date)}
-//                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-//                   required
-//                 />
-//               </div>
-
-//               <div className="relative">
-//                 <FaCamera className="absolute top-3 left-3 text-gray-400" />
-//                 <input
-//                   type="file"
-//                   accept="image/*"
-//                   onChange={handleImageUpload}
-//                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-//                 />
-//               </div>
-//             </div>
-
-//             {userImage && (
-//               <div className="mt-4">
-//                 <p className="text-sm text-gray-600 mb-2">Preview:</p>
-//                 <img
-//                   src={userImage}
-//                   alt="User uploaded"
-//                   className="w-32 h-32 object-cover rounded-lg"
-//                 />
-//               </div>
-//             )}
-
-//             {error && (
-//               <div className="bg-red-50 text-red-500 p-3 rounded-lg">
-//                 {error}
-//               </div>
-//             )}
-
-//             {weather && (
-//               <div className="bg-blue-50 p-4 rounded-lg">
-//                 <h4 className="font-semibold text-lg mb-2">Current Weather in {location}</h4>
-//                 <div className="grid grid-cols-2 gap-4">
-//                   <div>
-//                     <p className="text-gray-600">Temperature</p>
-//                     <p className="font-semibold">{Math.round(weather.main.temp)}°C</p>
-//                   </div>
-//                   <div>
-//                     <p className="text-gray-600">Weather</p>
-//                     <p className="font-semibold">{weather.weather[0].main}</p>
-//                   </div>
-//                   <div>
-//                     <p className="text-gray-600">Humidity</p>
-//                     <p className="font-semibold">{weather.main.humidity}%</p>
-//                   </div>
-//                   <div>
-//                     <p className="text-gray-600">Wind Speed</p>
-//                     <p className="font-semibold">{weather.wind.speed} m/s</p>
-//                   </div>
-//                 </div>
-//               </div>
-//             )}
-
-//             {outfits.length > 0 && (
-//               <div className="mt-6">
-//                 <h4 className="text-2xl font-semibold mb-4">Recommended Outfits</h4>
-//                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-//                   {outfits.map((outfit, index) => (
-//                     <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl">
-//                       <div className="relative group">
-//                         <img 
-//                           src={outfit.thumbnail} 
-//                           alt={`Outfit ${index + 1}`} 
-//                           className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
-//                         />
-//                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-//                       </div>
-                      
-//                       <div className="p-4">
-//                         <div className="flex flex-col gap-2">
-//                           <button 
-//                             onClick={() => window.open(`https://www.amazon.com/dp/${outfit.asin}`, '_blank')}
-//                             className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200"
-//                           >
-//                             <ExternalLink className="w-4 h-4" />
-//                             View on Amazon
-//                           </button>
-                          
-//                           <button 
-//                             onClick={() => {/* Add try on functionality */}}
-//                             className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
-//                           >
-//                             <Shirt className="w-4 h-4" />
-//                             Try On
-//                           </button>
-//                         </div>
-//                       </div>
-//                     </div>
-//                   ))}
-//                 </div>
-//               </div>
-//             )}
-
-//             <button
-//               type="submit"
-//               disabled={loading}
-//               className={`w-full bg-blue-500 text-white py-3 px-6 rounded-lg transition-colors duration-200 ${
-//                 loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'
-//               }`}
-//             >
-//               {loading ? 'Loading...' : 'Generate Outfit Suggestions'}
-//             </button>
-//           </form>
-//         </div>
-//       </main>
-//     </div>
-//   );
-// }
-
-// export default Vacation;
-
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
@@ -209,7 +14,6 @@ function Vacation() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [outfits, setOutfits] = useState([]);
-  // New state for try-on feature
   const [tryOnImage, setTryOnImage] = useState(null);
   const [tryOnLoading, setTryOnLoading] = useState(false);
   const [showTryOnModal, setShowTryOnModal] = useState(false);
@@ -222,15 +26,12 @@ function Vacation() {
     try {
       const gender = "male"
       const formData = {location, date, gender}
-      
-      console.log(formData)
       const response = await axios.post('http://localhost:4700/model', formData);
       const { weatherData, thumbnails } = response.data.payload;
       
       setWeather(weatherData);
       setOutfits(thumbnails);
     } catch (err) {
-      console.log(err)
       setError(err.message);
     } finally {
       setLoading(false);
@@ -248,7 +49,6 @@ function Vacation() {
     }
   };
 
-  // New try-on handler
   const handleTryOn = async (outfit) => {
     if (!userImage) {
       alert('Please upload your image first');
@@ -277,38 +77,38 @@ function Vacation() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gray-800">
       <Navbar />
 
       {/* Try-on Modal */}
       {showTryOnModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg max-w-2xl w-full relative">
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-6">
+          <div className="bg-gray-800 rounded-2xl shadow-2xl max-w-3xl w-full relative overflow-hidden border border-gray-700">
             <button
               onClick={() => {
                 setShowTryOnModal(false);
                 setTryOnImage(null);
               }}
-              className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
+              className="absolute right-4 top-4 text-teal-400 hover:text-teal-300 transition-colors"
             >
-              <FaTimes size={24} />
+              <FaTimes size={28} />
             </button>
-            <div className="p-6">
-              <h3 className="text-xl font-semibold mb-4">Virtual Try-On Result</h3>
+            <div className="p-8">
+              <h3 className="text-2xl font-bold text-teal-400 mb-6">Virtual Try-On Result</h3>
               <div className="flex justify-center">
                 {tryOnLoading ? (
-                  <div className="flex items-center justify-center h-96">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+                  <div className="flex items-center justify-center h-[400px]">
+                    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-teal-400"></div>
                   </div>
                 ) : tryOnImage ? (
                   <img
                     src={tryOnImage}
                     alt="Try-on result"
-                    className="max-h-96 object-contain rounded-lg"
+                    className="max-h-[400px] object-contain rounded-xl shadow-md border border-gray-700"
                   />
                 ) : (
-                  <div className="flex items-center justify-center h-96 bg-gray-100 rounded-lg">
-                    <p className="text-gray-500">Processing try-on...</p>
+                  <div className="flex items-center justify-center h-[400px] bg-gray-700 rounded-xl">
+                    <p className="text-teal-400 text-lg">Processing try-on...</p>
                   </div>
                 )}
               </div>
@@ -317,121 +117,120 @@ function Vacation() {
         </div>
       )}
 
-      <main className="max-w-7xl mx-auto px-4 py-12 mt-12">
-        <div className="bg-white rounded-2xl shadow-xl p-8 max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+      <main className="max-w-6xl mx-auto px-6 py-16">
+        <div className="bg-gray-800 rounded-3xl shadow-lg p-8 border border-gray-700">
+          <h2 className="text-4xl font-extrabold text-center mb-10 text-teal-400 tracking-tight">
             Plan Your Perfect Vacation Outfit
           </h2>
           
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Existing form inputs */}
-            <div className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="space-y-6">
               <div className="relative">
-                <FaMapMarkerAlt className="absolute top-3 left-3 text-gray-400" />
+                <FaMapMarkerAlt className="absolute top-1/2 left-4 transform -translate-y-1/2 text-teal-400" />
                 <input
                   type="text"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   placeholder="Enter your destination"
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-3 border border-gray-700 rounded-xl focus:ring-2 focus:ring-teal-400 focus:border-transparent transition-all text-teal-400 placeholder-gray-400 bg-gray-700"
                   required
                 />
               </div>
 
               <div className="relative">
-                <FaCalendar className="absolute top-3 left-3 text-gray-400" />
+                <FaCalendar className="absolute top-1/2 left-4 transform -translate-y-1/2 text-teal-400" />
                 <DatePicker
                   selected={date}
                   onChange={(date) => setDate(date)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-3 border border-gray-700 rounded-xl focus:ring-2 focus:ring-teal-400 focus:border-transparent transition-all text-teal-400 bg-gray-700"
                   required
                 />
               </div>
 
               <div className="relative">
-                <FaCamera className="absolute top-3 left-3 text-gray-400" />
+                <FaCamera className="absolute top-1/2 left-4 transform -translate-y-1/2 text-teal-400" />
                 <input
                   type="file"
                   accept="image/*"
                   onChange={handleImageUpload}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full pl-12 pr-4 py-3 border border-gray-700 rounded-xl focus:ring-2 focus:ring-teal-400 focus:border-transparent transition-all text-teal-400 bg-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-400 file:text-gray-800 hover:file:bg-teal-300"
                 />
               </div>
             </div>
 
             {userImage && (
-              <div className="mt-4">
-                <p className="text-sm text-gray-600 mb-2">Preview:</p>
+              <div className="mt-6">
+                <p className="text-sm text-teal-400 mb-3 font-medium">Preview:</p>
                 <img
                   src={userImage}
                   alt="User uploaded"
-                  className="w-32 h-32 object-cover rounded-lg"
+                  className="w-40 h-40 object-cover rounded-xl shadow-md border border-gray-700"
                 />
               </div>
             )}
 
             {error && (
-              <div className="bg-red-50 text-red-500 p-3 rounded-lg">
+              <div className="bg-red-900/20 text-red-400 p-4 rounded-xl border border-gray-700">
                 {error}
               </div>
             )}
 
             {weather && (
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <h4 className="font-semibold text-lg mb-2">Current Weather in {location}</h4>
-                <div className="grid grid-cols-2 gap-4">
+              <div className="bg-gray-700 p-6 rounded-xl border border-gray-700">
+                <h4 className="font-semibold text-xl mb-4 text-teal-400">Weather in {location}</h4>
+                <div className="grid grid-cols-2 gap-6">
                   <div>
-                    <p className="text-gray-600">Temperature</p>
-                    <p className="font-semibold">{Math.round(weather.main.temp)}°C</p>
+                    <p className="text-gray-400 text-sm">Temperature</p>
+                    <p className="font-semibold text-lg text-teal-400">{Math.round(weather.main.temp)}°C</p>
                   </div>
                   <div>
-                    <p className="text-gray-600">Weather</p>
-                    <p className="font-semibold">{weather.weather[0].main}</p>
+                    <p className="text-gray-400 text-sm">Weather</p>
+                    <p className="font-semibold text-lg text-teal-400">{weather.weather[0].main}</p>
                   </div>
                   <div>
-                    <p className="text-gray-600">Humidity</p>
-                    <p className="font-semibold">{weather.main.humidity}%</p>
+                    <p className="text-gray-400 text-sm">Humidity</p>
+                    <p className="font-semibold text-lg text-teal-400">{weather.main.humidity}%</p>
                   </div>
                   <div>
-                    <p className="text-gray-600">Wind Speed</p>
-                    <p className="font-semibold">{weather.wind.speed} m/s</p>
+                    <p className="text-gray-400 text-sm">Wind Speed</p>
+                    <p className="font-semibold text-lg text-teal-400">{weather.wind.speed} m/s</p>
                   </div>
                 </div>
               </div>
             )}
 
             {outfits.length > 0 && (
-              <div className="mt-6">
-                <h4 className="text-2xl font-semibold mb-4">Recommended Outfits</h4>
+              <div className="mt-8">
+                <h4 className="text-2xl font-bold mb-6 text-teal-400">Recommended Outfits</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {outfits.map((outfit, index) => (
-                    <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl">
+                    <div key={index} className="bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-700">
                       <div className="relative group">
                         <img 
                           src={outfit.thumbnail} 
                           alt={`Outfit ${index + 1}`} 
-                          className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                          className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105"
                         />
-                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                       
-                      <div className="p-4">
-                        <div className="flex flex-col gap-2">
+                      <div className="p-5">
+                        <div className="flex flex-col gap-3">
                           <button 
                             onClick={() => window.open(`https://www.amazon.com/dp/${outfit.asin}`, '_blank')}
-                            className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                            className="w-full flex items-center justify-center gap-2 px-4 py-2 border border-gray-700 rounded-lg hover:bg-gray-700 transition-colors duration-200 text-teal-400 font-medium"
                           >
-                            <ExternalLink className="w-4 h-4" />
+                            <ExternalLink className="w-5 h-5" />
                             View on Amazon
                           </button>
                           
                           <button 
                             onClick={() => handleTryOn(outfit)}
                             disabled={tryOnLoading}
-                            className={`w-full flex items-center justify-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg transition-colors duration-200 
-                              ${tryOnLoading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
+                            className={`w-full flex items-center justify-center gap-2 px-4 py-2 bg-teal-400 text-gray-800 rounded-lg transition-colors duration-200 font-medium
+                              ${tryOnLoading ? 'opacity-60 cursor-not-allowed' : 'hover:bg-teal-500'}`}
                           >
-                            <Shirt className="w-4 h-4" />
+                            <Shirt className="w-5 h-5" />
                             {tryOnLoading ? 'Processing...' : 'Try On'}
                           </button>
                         </div>
@@ -445,8 +244,8 @@ function Vacation() {
             <button
               type="submit"
               disabled={loading}
-              className={`w-full bg-blue-500 text-white py-3 px-6 rounded-lg transition-colors duration-200 ${
-                loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'
+              className={`w-full bg-teal-400 text-gray-800 py-3 px-6 rounded-xl font-semibold transition-all duration-200 ${
+                loading ? 'opacity-60 cursor-not-allowed' : 'hover:bg-teal-500'
               }`}
             >
               {loading ? 'Loading...' : 'Generate Outfit Suggestions'}
