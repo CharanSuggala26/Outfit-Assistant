@@ -13,13 +13,15 @@ your environment to offering a virtual preview of your look, we’re here to mak
 ![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/work.png)
 ![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/work2.png)
 ![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/work4.png)
+![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/work5.png)
+![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/tryon.png)
 
 
 
 ## Features
 - Responsive Design
 - Interactive UI/UX
-- API Integration (OPen Weather API and Amazon Search API)
+- API Integration (Open Weather API and Amazon Search API)
 - Authentication & Authorization through Clerk
 
 ## Installation
@@ -78,5 +80,6 @@ npm run dev  # Runs the Vite development server
 
 ## Contact
 For any inquiries, reach out to:
-- **Your Name** - [LinkedIn](https://www.linkedin.com/in/your-profile)
-- **Email:** your-email@example.com
+- **Sai Charan Suggala** - [LinkedIn](https://www.linkedin.com/in/saicharansuggala/)
+- **Email:** suggalasaicharan789@gmail.com
+- **To Know Me** -[Portfolio](https://my-portfolio-lovat-six-79.vercel.app/)
