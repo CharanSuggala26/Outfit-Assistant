@@ -9,10 +9,10 @@ your environment to offering a virtual preview of your look, we’re here to mak
 
 ## Demo
 
-![Project Demo](D:\Outfit Assistant\client\public\images\work3.png)
-![Project Demo](D:\Outfit Assistant\client\public\images\work4.png)
-![Project Demo](D:\Outfit Assistant\client\public\images\work.png)
-![Project Demo](D:\Outfit Assistant\client\public\images\work2.png)
+![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/work3.png)
+![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/work.png)
+![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/work2.png)
+![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/work4.png)
 
 
 
