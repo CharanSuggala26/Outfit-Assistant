@@ -1,13 +1,14 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
-import { FaCalendar, FaMapMarkerAlt, FaCamera, FaTimes } from 'react-icons/fa';
+import { FaCalendar, FaMapMarkerAlt, FaCamera, FaTimes, FaEnvelope, FaStreetView, FaCalculator } from 'react-icons/fa';
 import { ExternalLink, Shirt } from 'lucide-react';
 import Navbar from '../components/Navbar';
 
 function Vacation() {
   const [location, setLocation] = useState('');
+  const [Ocassion,setOcassion]=useState('');
   const [date, setDate] = useState(new Date());
   const [userImage, setUserImage] = useState(null);
   const [weather, setWeather] = useState(null);
@@ -25,7 +26,7 @@ function Vacation() {
     
     try {
       const gender = "male"
-      const formData = {location, date, gender}
+      const formData = {location,Ocassion, date, gender}
       const response = await axios.post('http://localhost:4700/model', formData);
       const { weatherData, thumbnails } = response.data.payload;
       
@@ -132,6 +133,17 @@ function Vacation() {
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   placeholder="Enter your destination"
+                  className="w-full pl-12 pr-4 py-3 border border-gray-700 rounded-xl focus:ring-2 focus:ring-teal-400 focus:border-transparent transition-all text-teal-400 placeholder-gray-400 bg-gray-700"
+                  required
+                />
+              </div>
+              <div className="relative">
+                <FaStreetView className="absolute top-1/2 left-4 transform -translate-y-1/2 text-teal-400" />
+                <input
+                  type="text"
+                  value={Ocassion}
+                  onChange={(e) => setOcassion(e.target.value)}
+                  placeholder="Enter your Purpose"
                   className="w-full pl-12 pr-4 py-3 border border-gray-700 rounded-xl focus:ring-2 focus:ring-teal-400 focus:border-transparent transition-all text-teal-400 placeholder-gray-400 bg-gray-700"
                   required
                 />
@@ -248,7 +260,7 @@ function Vacation() {
                 loading ? 'opacity-60 cursor-not-allowed' : 'hover:bg-teal-500'
               }`}
             >
-              {loading ? 'Loading...' : 'Generate Outfit Suggestions'}
+              {loading ? 'Generating...' : 'Generate Outfit Suggestions'}
             </button>
           </form>
         </div>

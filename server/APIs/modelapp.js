@@ -17,7 +17,7 @@ function imageFileToBase64(imagePath) {
 }
 
 router.post('/',expAsyncHandler(async (req, res) => {
-    const { location, date, gender } = req.body;
+    const { location, Ocassion,date, gender } = req.body;
 
     let weatherData;
 
@@ -56,14 +56,14 @@ router.post('/',expAsyncHandler(async (req, res) => {
     const chatSession = model.startChat({ generationConfig, history: [] });
 
     const result = await chatSession.sendMessage(
-        `I will give you some weather conditions, Gender, Location. Give me one or two search keywords to search for an outfit suitable for those conditions and location with respect to gender. \n\nLocation: ${location}, \nTemperature: ${weatherData.main.temp}°C, \nWeather: ${weatherData.weather[0].main}, \nGender: ${gender}. Give me the search terms in such a way that they can directly be sent as html link params (using %20 etc.)`
+       `I will give you some weather conditions, Gender, Location. Give me one or two search keywords to search for an outfit suitable for those conditions and location with respect to gender. \n\nLocation: ${location}, \nTemperature: ${weatherData.main.temp}°C, \nWeather: ${weatherData.weather[0].main}, \nGender: ${gender}. Give me the search terms in such a way that they can directly be sent as html link params (using %20 etc.)`
     );
 
     const searchQuery = result.response.text();
 
-    
-        const resp = await axios.get(`https://data.unwrangle.com/api/getter/?platform=amazon_search&search=${searchQuery}&country_code=us&page=1&api_key=e4a971a1f39e2be5c03cbd08eb5d7940504c5195`);
-        // Extracting the top 20 results' thumbnails
+        //const resp = await axios.get(`https://data.unwrangle.com/api/getter/?platform=amazon_search&search=${searchQuery}&country_code=us&page=1&api_key=ff65bfe894020493b8daf6198887828b930d318b`);
+        const resp=await axios.get(`https://data.unwrangle.com/api/getter/?platform=amazon_search&search=${searchQuery}&country_code=us&page=1&api_key=ff65bfe894020493b8daf6198887828b930d318b`);
+        // We are Extracting the top 20 results' thumbnails
         const thumbnails = resp.data.results.slice(0, 10).map(item => ({
             asin: item.asin,
             thumbnail: item.thumbnail
@@ -72,12 +72,10 @@ router.post('/',expAsyncHandler(async (req, res) => {
         console.log(thumbnails)
 
         return res.send({status: 200, payload: {thumbnails, weatherData}});
-
-
 }));
 
 
-// POST endpoint to handle the request
+// POST endpoint to handle the request of Virtual-Try-ON
 router.post('/try-on', expAsyncHandler(async (req, res) => {
     const api_key = process.env.MODEL_KEY;
     const { model_image, cloth_image } = req.body;
