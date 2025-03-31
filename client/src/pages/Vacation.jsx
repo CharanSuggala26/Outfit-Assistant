@@ -27,7 +27,7 @@ function Vacation() {
     try {
       const gender = "male"
       const formData = {location,Ocassion, date, gender}
-      const response = await axios.post('https://outfit-assistant.vercel.app//model', formData);
+      const response = await axios.post('http://localhost:4700/model', formData);
       const { weatherData, thumbnails } = response.data.payload;
       
       setWeather(weatherData);
@@ -60,9 +60,13 @@ function Vacation() {
     setShowTryOnModal(true);
 
     try {
-      const response = await axios.post('https://outfit-assistant.vercel.app//model/try-on', {
-        model_image:"D:\\Outfit Assistant\\server\\APIs\\assets\\Kohli.png",
-        cloth_image:"D:\\Outfit Assistant\\server\\APIs\\assets\\csk.png"
+      const response = await axios.post('http://localhost:4700/model/try-on', {
+        model_image://userImage,
+        
+        "D:\\Outfit Assistant\\server\\APIs\\assets\\Kohli.png",
+        cloth_image://outfit.thumbnail,
+
+        "D:\\Outfit Assistant\\server\\APIs\\assets\\csk.png",
       });
 
       if (response.data.status === 'Success') {
