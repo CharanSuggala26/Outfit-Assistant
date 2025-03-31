@@ -7,19 +7,32 @@ or just another day—by harnessing smart technology to craft personalized outfi
 We combine AI precision with a passion for fashion to deliver outfit inspiration that’s as unique as you are. From understanding 
 your environment to offering a virtual preview of your look, we’re here to make style effortless and exciting—no matter where life takes you.
 
+A Full-Stack Web Application implemented with React, TensorFlow.js, OpenWeather API, AR Technology.
+
+• Developed an AI-driven outfit suggestion system that considers destination type, weather conditions, and user
+ preferences. Integrated online wardrobe selection for mix-and-match recommendations.
+ 
+• Implemented real-time Augmented Reality (AR) outfit visualization using TensorFlow.js, enabling users to
+ overlay outfits on their body via a webcam or uploaded images.
+ 
+• Built an automated packing list tool that suggests clothing, accessories, and essentials based on itinerary and
+ weather, integrating compact packing strategies. 
+
 ## Demo
 
 ![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/work3.png)
 ![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/work.png)
 ![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/work2.png)
 ![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/work4.png)
+![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/work5.png)
+![Project Demo](https://github.com/CharanSuggala26/Outfit-Assistant/blob/main/client/public/images/tryon.png)
 
 
 
 ## Features
 - Responsive Design
 - Interactive UI/UX
-- API Integration (OPen Weather API and Amazon Search API)
+- API Integration (Open Weather API and Amazon Search API)
 - Authentication & Authorization through Clerk
 
 ## Installation
@@ -78,5 +91,6 @@ npm run dev  # Runs the Vite development server
 
 ## Contact
 For any inquiries, reach out to:
-- **Your Name** - [LinkedIn](https://www.linkedin.com/in/your-profile)
-- **Email:** your-email@example.com
+- **Sai Charan Suggala** - [LinkedIn](https://www.linkedin.com/in/saicharansuggala/)
+- **Email:** suggalasaicharan789@gmail.com
+- **To Know Me** -[Portfolio](https://my-portfolio-lovat-six-79.vercel.app/)
