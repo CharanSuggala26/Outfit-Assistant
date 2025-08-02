@@ -85,7 +85,7 @@ function Vacation() {
     <div className="min-h-screen bg-gray-800">
       <Navbar />
 
-      {/* Try-on Modal */}
+      {/* Virtual Try-on Modal */}
       {showTryOnModal && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-6">
           <div className="bg-gray-800 rounded-2xl shadow-2xl max-w-3xl w-full relative overflow-hidden border border-gray-700">

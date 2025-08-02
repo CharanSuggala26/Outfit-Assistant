@@ -16,12 +16,12 @@ const Navbar = () => {
   return (
     <nav className="bg-teal-300 shadow-lg py-4">
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        {/* Logo / Brand */}
+        
         <Link to="/" className="text-2xl font-bold text-gray-800">
           AI Vacation Outfit Assistant
         </Link>
 
-        {/* Desktop Menu */}
+        {/* Navbar Menu with routed links */}
         <div className="hidden md:flex space-x-6">
           <Link to="/" className="text-gray-700 hover:text-gray-900">Home</Link>
           <Link to="/about" className="text-gray-700 hover:text-gray-900">About</Link>
@@ -29,7 +29,6 @@ const Navbar = () => {
           <Link to="/contact" className="text-gray-700 hover:text-gray-900">Contact</Link>
         </div>
 
-        {/* Authentication Section */}
         <div className="hidden md:flex space-x-4">
           <SignedIn>
             <UserButton afterSignOutUrl="/" />
@@ -46,13 +45,13 @@ const Navbar = () => {
           </SignedOut>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Menu Button for moblies i.e used for small screens*/}
         <button className="md:hidden text-gray-800" onClick={() => setIsOpen(!isOpen)}>
           ☰
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown for smaller screens */}
       {isOpen && (
         <div className="md:hidden flex flex-col space-y-4 px-6 py-4 bg-white shadow-lg">
           <Link to="/" className="text-gray-700 hover:text-gray-900">Home</Link>
