@@ -60,11 +60,12 @@ router.post('/',expAsyncHandler(async (req, res) => {
        `I will give you some weather conditions, Gender, Location. Give me one or two search keywords to search for an outfit suitable for those conditions and location with respect to gender. \n\nLocation: ${location}, \nTemperature: ${weatherData.main.temp}°C, \nWeather: ${weatherData.weather[0].main}, \nGender: ${gender} ,\n Ocassion: ${Ocassion}. Give me the search terms in such a way that they can directly be sent as html link params (using %20 etc.)`
     );
 
-    // we are sending the response i.e (search key words)
+    // we are sending the response i.e (search key words) to the amazon API 
     const searchQuery = result.response.text();
 
         //const resp = await axios.get(`https://data.unwrangle.com/api/getter/?platform=amazon_search&search=${searchQuery}&country_code=us&page=1&api_key=ff65bfe894020493b8daf6198887828b930d318b`);
         const resp=await axios.get(`https://data.unwrangle.com/api/getter/?platform=amazon_search&search=${searchQuery}&country_code=us&page=1&api_key=ff65bfe894020493b8daf6198887828b930d318b`);
+
         // We are Extracting the top 20 results' thumbnails from the 
         const thumbnails = resp.data.results.slice(0, 10).map(item => ({
             asin: item.asin,
@@ -77,12 +78,12 @@ router.post('/',expAsyncHandler(async (req, res) => {
 }));
 
 
-// POST endpoint to handle the request of Virtual-Try-ON
+// To handle the request of Virtual-Try-ON 
 router.post('/try-on', expAsyncHandler(async (req, res) => {
     const api_key = process.env.MODEL_KEY;
     const { model_image, cloth_image } = req.body;
 
-    // Convert images to base64 if they are URLs or file paths
+    // we are converting input images to base64 if they are URLs or file paths.
     const modelImageBase64 =  imageFileToBase64(model_image);
     const clothImageBase64 =  imageFileToBase64(cloth_image);
 
@@ -98,7 +99,7 @@ router.post('/try-on', expAsyncHandler(async (req, res) => {
 
     try {
         const response = await axios.post(url, data, { headers: { 'x-api-key': api_key } });
-        res.json(response.data); // Return the generated image or result
+        res.json(response.data); // Returning the generated image i.e result after virtual try-on.
     } catch (error) {
         console.error('Error:', error.response ? error.response.data : error.message);
         res.status(500).json({ error: 'An error occurred while processing the request.' });
